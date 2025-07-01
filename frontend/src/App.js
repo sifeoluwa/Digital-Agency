@@ -376,10 +376,10 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
         <div className="flex flex-col h-full">
           <nav className="flex-1 px-4 py-4 space-y-2">
             {navigation.map((item) => (
-              <a
+              <button
                 key={item.name}
-                href={item.href}
-                className={`flex items-center px-3 py-2 text-sm font-medium rounded-lg transition-colors ${
+                onClick={() => handleNavigation(item.href)}
+                className={`flex items-center w-full px-3 py-2 text-sm font-medium rounded-lg transition-colors text-left ${
                   item.current
                     ? 'bg-indigo-600 text-white'
                     : 'text-gray-300 hover:bg-gray-800 hover:text-white'
@@ -387,7 +387,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
               >
                 <item.icon className="w-5 h-5 mr-3" />
                 {item.name}
-              </a>
+              </button>
             ))}
           </nav>
 
