@@ -325,7 +325,7 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
 
   const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
-    { name: 'Projects', href: '/projects', icon: ProjectorIcon, current: false },
+    { name: 'Projects', href: '/projects', icon: PresentationChartBarIcon, current: false },
     { name: 'Team', href: '/team', icon: UsersIcon, current: false },
     { name: 'Analytics', href: '/analytics', icon: ChartBarIcon, current: false },
     { name: 'Calendar', href: '/calendar', icon: CalendarIcon, current: false },
