@@ -60,7 +60,7 @@ app.add_middleware(
 )
 
 # Mount socket.io
-socket_manager.mount_to(app)
+socket_manager = SocketManager(app=app, socketio_path="/ws")
 
 # Security
 security = HTTPBearer()
