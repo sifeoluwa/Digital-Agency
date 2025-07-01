@@ -30,7 +30,7 @@ tasks_collection = db.tasks
 
 # Socket.io setup
 sio = socketio.AsyncServer(cors_allowed_origins="*")
-socket_manager = SocketManager(app=None, socketio_path="/ws")
+socket_manager = None  # Will be initialized after app creation
 
 @asynccontextmanager
 async def lifespan(app: FastAPI):
