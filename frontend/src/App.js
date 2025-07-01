@@ -115,10 +115,10 @@ const AuthProvider = ({ children }) => {
       api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
       
       toast.success('Login successful!');
-      return true;
+      return { success: true, user: userData };
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Login failed');
-      return false;
+      return { success: false };
     }
   };
 
@@ -133,10 +133,10 @@ const AuthProvider = ({ children }) => {
       api.defaults.headers.common['Authorization'] = `Bearer ${access_token}`;
       
       toast.success('Registration successful!');
-      return true;
+      return { success: true, user: userData };
     } catch (error) {
       toast.error(error.response?.data?.detail || 'Registration failed');
-      return false;
+      return { success: false };
     }
   };
 
