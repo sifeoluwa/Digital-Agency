@@ -258,24 +258,60 @@ class DigitalAgencyAPITester(unittest.TestCase):
         self.assertEqual(response.status_code, 401)
         print("✅ Invalid login test passed")
 
+def run_test(test_name):
+    print(f"\n{'='*50}")
+    print(f"Running test: {test_name}")
+    print(f"{'='*50}")
+    
+    tester = DigitalAgencyAPITester(test_name)
+    try:
+        getattr(tester, test_name)()
+        print(f"✅ {test_name} PASSED")
+        return True
+    except Exception as e:
+        print(f"❌ {test_name} FAILED: {str(e)}")
+        return False
+
 if __name__ == "__main__":
     # Run tests in order
-    test_suite = unittest.TestSuite()
-    test_suite.addTest(DigitalAgencyAPITester('test_01_health_check'))
-    test_suite.addTest(DigitalAgencyAPITester('test_02_register_user'))
-    test_suite.addTest(DigitalAgencyAPITester('test_03_login_user'))
-    test_suite.addTest(DigitalAgencyAPITester('test_04_get_current_user'))
-    test_suite.addTest(DigitalAgencyAPITester('test_05_get_users'))
-    test_suite.addTest(DigitalAgencyAPITester('test_06_create_project'))
-    test_suite.addTest(DigitalAgencyAPITester('test_07_get_projects'))
-    test_suite.addTest(DigitalAgencyAPITester('test_08_get_project_by_id'))
-    test_suite.addTest(DigitalAgencyAPITester('test_09_update_project'))
-    test_suite.addTest(DigitalAgencyAPITester('test_10_create_task'))
-    test_suite.addTest(DigitalAgencyAPITester('test_11_get_project_tasks'))
-    test_suite.addTest(DigitalAgencyAPITester('test_12_update_task'))
-    test_suite.addTest(DigitalAgencyAPITester('test_13_delete_task'))
-    test_suite.addTest(DigitalAgencyAPITester('test_14_delete_project'))
-    test_suite.addTest(DigitalAgencyAPITester('test_15_invalid_login'))
+    tests = [
+        'test_01_health_check',
+        'test_02_register_user',
+        'test_03_login_user',
+        'test_04_get_current_user',
+        'test_05_get_users',
+        'test_06_create_project',
+        'test_07_get_projects',
+        'test_08_get_project_by_id',
+        'test_09_update_project',
+        'test_10_create_task',
+        'test_11_get_project_tasks',
+        'test_12_update_task',
+        'test_13_delete_task',
+        'test_14_delete_project',
+        'test_15_invalid_login'
+    ]
     
-    runner = unittest.TextTestRunner(verbosity=2)
-    runner.run(test_suite)
+    results = []
+    tester = DigitalAgencyAPITester()
+    
+    for test in tests:
+        success = run_test(test)
+        results.append((test, success))
+    
+    # Print summary
+    print("\n" + "="*50)
+    print("TEST SUMMARY")
+    print("="*50)
+    passed = sum(1 for _, success in results if success)
+    print(f"PASSED: {passed}/{len(tests)} tests")
+    
+    if passed != len(tests):
+        print("\nFAILED TESTS:")
+        for test, success in results:
+            if not success:
+                print(f"❌ {test}")
+        exit(1)
+    else:
+        print("\nAll tests passed successfully! 🎉")
+        exit(0)
