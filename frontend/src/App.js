@@ -26,7 +26,7 @@ import { CSS } from '@dnd-kit/utilities';
 import {
   UserIcon,
   PlusIcon,
-  ProjectorIcon,
+  PresentationChartBarIcon,
   UsersIcon,
   ChartBarIcon,
   Bars3Icon,
