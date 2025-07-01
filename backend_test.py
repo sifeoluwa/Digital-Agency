@@ -258,12 +258,11 @@ class DigitalAgencyAPITester(unittest.TestCase):
         self.assertEqual(response.status_code, 401)
         print("✅ Invalid login test passed")
 
-def run_test(test_name):
+def run_test(test_name, tester):
     print(f"\n{'='*50}")
     print(f"Running test: {test_name}")
     print(f"{'='*50}")
     
-    tester = DigitalAgencyAPITester(test_name)
     try:
         getattr(tester, test_name)()
         print(f"✅ {test_name} PASSED")
@@ -293,10 +292,11 @@ if __name__ == "__main__":
     ]
     
     results = []
+    # Use a single tester instance to maintain state across tests
     tester = DigitalAgencyAPITester()
     
     for test in tests:
-        success = run_test(test)
+        success = run_test(test, tester)
         results.append((test, success))
     
     # Print summary
