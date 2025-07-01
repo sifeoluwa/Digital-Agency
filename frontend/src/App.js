@@ -329,6 +329,7 @@ const Login = () => {
 // Sidebar Component
 const Sidebar = ({ isOpen, setIsOpen }) => {
   const { user, logout } = useAuth();
+  const navigate = useNavigate();
 
   const navigation = [
     { name: 'Dashboard', href: '/dashboard', icon: HomeIcon, current: true },
@@ -339,6 +340,11 @@ const Sidebar = ({ isOpen, setIsOpen }) => {
     { name: 'Files', href: '/files', icon: DocumentIcon, current: false },
     { name: 'Settings', href: '/settings', icon: CogIcon, current: false },
   ];
+
+  const handleNavigation = (href) => {
+    navigate(href);
+    setIsOpen(false);
+  };
 
   return (
     <>
