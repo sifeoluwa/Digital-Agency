@@ -211,13 +211,20 @@ const Login = () => {
     role: 'developer'
   });
   const { login, register } = useAuth();
+  const navigate = useNavigate();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    let result;
     if (isLogin) {
-      await login(formData.email, formData.password);
+      result = await login(formData.email, formData.password);
     } else {
-      await register(formData.name, formData.email, formData.password, formData.role);
+      result = await register(formData.name, formData.email, formData.password, formData.role);
+    }
+    
+    if (result.success) {
+      // Navigate to dashboard on successful authentication
+      navigate('/dashboard');
     }
   };
 
